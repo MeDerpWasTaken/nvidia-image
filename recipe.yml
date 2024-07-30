@@ -22,8 +22,8 @@ stages:
   - name: nvidia-official-driver
     type: shell
     commands:
-    - curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/3bf863cc.pub | gpg --dearmor -o /usr/share/keyrings/nvidia-drivers.gpg
-    - echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/ /' > /etc/apt/sources.list.d/nvidia-drivers.list
+#    - curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/3bf863cc.pub | gpg --dearmor -o /usr/share/keyrings/nvidia-drivers.gpg
+#    - echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/ /' > /etc/apt/sources.list.d/nvidia-drivers.list
     - apt-get update
     - apt-get install nvidia-driver nvidia-vaapi-driver nvidia-settings nvidia-smi -y
     - apt-mark hold nvidia-driver nvidia-vaapi-driver nvidia-settings nvidia-smi
@@ -56,11 +56,11 @@ stages:
     - chmod +x /usr/bin/nrun
     - chmod +x /usr/bin/prime-switch
 
-#  - name: enable-wayland
-#    type: shell
-#    commands:
-#    - mkdir -p /etc/udev/rules.d
-#    - ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+  - name: enable-wayland
+    type: shell
+    commands:
+    - mkdir -p /etc/udev/rules.d
+    - ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
   - name: cleanup
     type: shell
